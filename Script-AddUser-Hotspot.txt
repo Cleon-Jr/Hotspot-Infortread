@@ -1,0 +1,40 @@
+/system scheduler remove [find]
+/system logging action remove [find name=hotspot]
+/system logging remove [find action=hotspot]
+
+
+/system scheduler
+add interval=3s name=ADD_USER_HOTSPOT on-event=":global userToAdd 1\r\
+\n:global fileContent  [/file get [find  name=users-to-hotspot.0.txt] contents  ]\r\
+\n\r\
+\n:while (\$userToAdd != 0) do={\r\
+\n\r\
+\n:global beginString ([:find \$fileContent \"!==\"] + 3) \r\
+\n:if (\$beginString = 3) do={/file set [find name=users-to-hotspot.0.txt] contents=\"\";:return \"\";} \r\
+\n:global endString [:find \$fileContent \"==!\"]\r\
+\n:global userToAdd [toarray [:pick \$fileContent \$beginString \$endString]]\r\
+\n:global fileContent [:pick \$fileContent (\$endString + 3) [:len \$fileContent]]\r\
+\n\r\
+\n\r\
+\n:global name [pick \$userToAdd 0]\r\
+\n:global cpf [pick \$userToAdd 1]\r\
+\n:global email [pick \$userToAdd 2]\r\
+\n:global phone [pick \$userToAdd 3]\r\
+\n:global password [pick \$phone ([:len \$phone] - 4) [:len \$phone]]\r\
+\n\r\
+\n:do {/ip hotspot user add password=\$password name=\$cpf comment=\"\$name - \$email - \$phone\"} on-error={}\r\
+\n\r\
+\n:put \"Nome: \$name - CPF: \$cpf - Email: \$email - Telefone: \$phone\"\r\
+\n/log warning message=\"Nome: \$name - CPF: \$cpf - Email: \$email - Telefone: \$phone\"\r\
+\n\r\
+\ndelay 500ms\r\
+\n\r\
+\n}\r\
+\n\r\
+\n" policy=ftp,reboot,read,write,policy,test,password,sniff,sensitive,romon 
+
+
+/system logging action
+add disk-file-count=1 disk-file-name=users-to-hotspot disk-lines-per-file=50 name=hotspot target=disk
+/system logging
+add action=hotspot topics=hotspot,info,debug

@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="expires" content="-1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>| Infortread - Cidade Digital |</title>
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/login-style.css">
+</head>
+
+<body>
+
+    <!-- two other colors
+
+<body class="lite">
+<body class="dark">
+
+-->
+
+    $(if chap-id)
+    <form name="sendin" action="$(link-login-only)" method="post" style="display:none">
+        <input type="hidden" name="username" />
+        <input type="hidden" name="password" />
+        <input type="hidden" name="dst" value="$(link-orig)" />
+        <input type="hidden" name="popup" value="true" />
+    </form>
+
+    <script src="/md5.js"></script>
+    <script>
+        function doLogin() {
+            document.sendin.username.value = document.login.username.value;
+            document.sendin.password.value = hexMD5('$(chap-id)' + document.login.password.value + '$(chap-challenge)');
+            document.sendin.submit();
+            return false;
+        }
+    </script>
+    $(endif)
+
+    <div class="card col-md-3">
+        <div class="card-header">
+            <img class="img-fluid mx-auto d-block" src="./img/CidadeDigital-logo.png">
+        </div>
+
+        <div class="card-body">
+            <form name="login" action="$(link-login-only)" method="post" $(if chap-id) onSubmit="return doLogin()"
+                $(endif) autocomplete="off">
+                <input type="hidden" name="dst" value="$(link-orig)" />
+                <input type="hidden" name="popup" value="true" />
+
+                <div class="form-row">
+                    <div class="form-gorup col-md-12">
+                        <input type="text" name="username" value="" class="form-control" required>
+                        <label>Seu CPF</label>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-gorup col-md-12">
+                        <input type="password" name="password" class="form-control"
+                            placeholder="              4 Últimos digitos do seu Telefone" required>
+                        <label>Senha</label>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-success btn-block">Entrar</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="card-footer">
+            <div class="d-grid">
+                <a href="./cadastro.html" class="btn btn-outline-secondary btn-block">Faça seu Cadastro Aqui</a>
+            </div>
+            <hr>
+            <p class="text-center">Produzido por Infortread Sistemas</p>
+            <img id="#lgTread" class="mx-auto d-block" src="./img/logo-w.png">
+            <p class="text-center"><a href="tel:08004561010">Contato 0800 456 1010</a></p>
+        </div>
+
+    </div>
+
+</body>
+
+</html>

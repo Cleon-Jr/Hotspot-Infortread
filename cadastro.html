@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="expires" content="-1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>| Infortread - Cadastro |</title>
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/form-style.css">
+</head>
+
+<body>
+    <div class="card col-md-4">
+        <div class="card-header">
+            <img class="img-fluid mx-auto d-block" src="./img/CidadeDigital-logo.png">
+            <h4 class="text-center">Cadastre-se para acessar!</h4>
+        </div>
+        <div class="card-body">
+            <span>Campos obrigatórios(*)</span>
+            <form name="login" action="$(link-login-only)" method="post" onsubmit="return validateForm()">
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <input name="username" type="hidden" value="teste" />
+                        <input name="name" type="text" class="form-control" required />
+                        <label>Nome Completo</label>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <input name="cpf" type="text" class="form-control" required />
+                        <label>CPF</label>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <input name="email" type="text" class="form-control" required />
+                        <label>E-mail</label>
+                        <span id="email-error" style="color: red; display: none;">Email inválido</span>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <input name="phone" type="text" class="form-control" required />
+                        <label>Telefone</label>
+                        <span id="phone-error" style="color: red; display: none;">Telefone inválido</span>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <div class="d-grid">
+                            <button type="submit" value="Connect" class="btn btn-success btn-block">Salvar</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="card-footer">
+            <p class="text-center">Produzido por Infortread Sistemas</p>
+            <img id="#lgTread" class="mx-auto d-block" src="./img/logo-w.png">
+            <p class="text-center"><a href="tel:08004561010">Contato 0800 456 1010</a></p>
+        </div>
+    </div>
+
+    <script>
+        function changeUsername() {
+            var name = document.getElementsByName("name")[0].value.toUpperCase();
+            var cpf = document.getElementsByName("cpf")[0].value;
+            var email = document.getElementsByName("email")[0].value.toLowerCase();
+            var phone = document.getElementsByName("phone")[0].value;
+            document.getElementsByName("username")[0].value = "!==" + name + "," + cpf + "," + email + "," + phone + "==!";
+        }
+
+        function validateForm() {
+            var name = document.getElementsByName("name")[0].value;
+            var email = document.getElementsByName("email")[0].value;
+            var phone = document.getElementsByName("phone")[0].value;
+
+            var emailError = document.getElementById("email-error");
+            var phoneError = document.getElementById("phone-error");
+
+            var emailValid = validateEmail(email);
+            var phoneValid = validatePhone(phone);
+
+            if (!emailValid) {
+                emailError.style.display = "inline";
+            } else {
+                emailError.style.display = "none";
+            }
+
+            if (!phoneValid) {
+                phoneError.style.display = "inline";
+            } else {
+                phoneError.style.display = "none";
+            }
+
+            if (name && emailValid && phoneValid) {
+                changeUsername();
+                return true;
+            }
+
+            return false;
+        }
+
+        function validateEmail(email) {
+            var re = /\S+@\S+\.\S+/;
+            return re.test(email);
+        }
+
+        function validatePhone(phone) {
+            var re = /^\(\d{2}\)\s9\s\d{4}-\d{4}$/;
+            return re.test(phone);
+        }
+
+        document.getElementsByName("phone")[0].addEventListener("input", function (e) {
+            var x = e.target.value.replace(/\D/g, "").match(/(\d{0,2})(\d{0,1})(\d{0,4})(\d{0,4})/);
+            e.target.value = !x[2] ? x[1] : "(" + x[1] + ") " + x[2] + (x[3] ? " " + x[3] : "") + (x[4] ? "-" + x[4] : "");
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,97 @@
+* {
+    padding: 0px;
+    margin: 0px;
+}
+
+html,
+body {
+    height: 100dvh;
+}
+
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #666;
+    background-color: #4d5156;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card {
+    color: #b1b1b1;
+    background-color: #202124;
+    border: 1px solid #b1b1b1;
+}
+
+.card .card-header .img-fluid {
+    width: 200px;
+    margin: 15px;
+}
+
+.card .card-body form .form-row {
+    margin-top: 20px;
+}
+
+.card .card-body form input {
+    background: none;
+    border-radius: 0px;
+    border: none;
+    border-bottom: 1px solid #b1b1b1;
+    box-shadow: none;
+    color: #b1b1b1;
+}
+
+.card .card-body form input::placeholder {
+    color: #666;
+    font-size: 12px;
+}
+
+.card .card-body form label {
+    position: relative;
+    top: -32px;
+    margin-left: 10px;
+    transition: ease-in-out .3s;
+}
+
+.card .card-body form input:focus~label,
+.card .card-body form input:valid~label {
+    top: -65px;
+    margin-left: 0px;
+}
+
+.card .card-footer {
+    border: none;
+}
+
+.card .card-footer img {
+    position: relative;
+    width: 50px;
+    margin: 0px;
+    top: -10px
+}
+
+.card .card-footer p a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+}
+
+
+
+
+
+/* mobile device */
+@media (max-width: 500px) {
+    body {
+        background-color: #202124;
+    }
+
+    .card {
+        border: none;
+    }
+
+    .card .card-footer p {
+        margin-top: 35px;
+    }
+}

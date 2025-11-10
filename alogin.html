@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="refresh" content="2; url=$(link-redirect)">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="expires" content="-1">
+    <title>| Infortread - Cidade Digital |</title>
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/others.css">
+    <script>
+        function startClock() {
+            $(if popup == 'true')
+                open('$(link-status)', 'hotspot_status', 'toolbar=0,location=0,directories=0,status=0,menubars=0,resizable=1,width=290,height=200');
+            $(endif)
+            location.href = unescape('$(link-redirect-esc)');
+        }
+
+    </script>
+</head>
+
+<body onload="startClock()">
+    <div class="card col-md-4">
+        <div class="card-header">
+            <img class="img-fluid mx-auto d-block" src="./img/CidadeDigital-logo.png">
+            <h1 class="text-center">Você está logado!</h1>
+        </div>
+        <div class="card-body">
+            <p class="info text-center">Se nada acontecer, <br> <a href="$(link-redirect)">clique aqui!</a></p>
+        </div>
+        <div class="card-footer">
+            <br>
+            <p class="text-center">Produzido por Infortread Sistemas</p>
+            <img id="#lgTread" class="mx-auto d-block" src="./img/logo-w.png">
+            <p class="text-center"><a href="tel:08004561010">Contato 0800 456 1010</a></p>
+        </div>
+    </div>
+</body>
+
+</html>
